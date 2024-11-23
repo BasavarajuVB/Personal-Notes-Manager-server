@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const connectDB = require("./config/db")
 
 const app = express();
 
@@ -9,10 +10,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// // Database connection
+// mongoose.connect(process.env.MONGODB_URI)
+//   .then(() => console.log('Connected to MongoDB'))
+//   .catch(err => console.error('MongoDB connection error:', err));
+
+connectDB();
 
 // Routes
 app.use('/api/notes', require('./routes/notes'));
